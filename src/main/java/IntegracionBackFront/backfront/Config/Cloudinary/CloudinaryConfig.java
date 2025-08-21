@@ -13,22 +13,22 @@ public class CloudinaryConfig {
 
     private  String cloudName;
     private  String apiKey;
-    private String apiSecret;
+    private  String apiSecret;
 
     @Bean
     public Cloudinary cloudinary(){
+        //Crea un objeto para leer las variables del archivo .env
+        Dotenv dotenv = Dotenv.load();
 
-        Dotenv dontenv = Dotenv.load();
+        //Crear un Map pra almacenar la configurcion necesaria para Cloudninary
+        Map<String, String> config = new HashMap<>();
 
-        //Crear un map para almacenar la configuracion
-        Map<String, String > config = new HashMap<>();
-
-        config.put("cloud_name", dontenv.get("CLOUDINARY_CLOUD_NAME"));
-        config.put("api_key", dontenv.get("CLOUDINARY_API_KEY"));
-        config.put("api_secret", dontenv.get("CLOUDINARY_API_SECRET"));
+        config.put("cloud_name",dotenv.get("CLOUDINARY_CLOUD_NAME"));
+        config.put("api_key",dotenv.get("CLOUDINARY_API_KEY"));
+        config.put("api_secret",dotenv.get("CLOUDINARY_API_SECRET"));
 
 
-        //Retornar una nueva instancia de cloudinary con la configuracion cargada
         return  new Cloudinary(config);
+
     }
 }
